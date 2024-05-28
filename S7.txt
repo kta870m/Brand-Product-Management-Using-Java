@@ -1,0 +1,20 @@
+Brand(Id, Name)
+
+Product(Id,brandId, Name, baseCost, Price, Quantity, Status)
+
+
+
+1) AddNew(T t)
+2) Update(T t);
+3) Delete(T t)
+4) findById()
+5) findbyName(String name)
+
+
+Design Generic Pattern
+1) Hien thi thong tin cua brand co nhieu product nhat kem so luong
+2) Tim va hien thi thong tin sp theo brand.name
+3) Thống kê số lượng sản phẩm theo từng brand và hiển thị như sau:
+
+Samsung 2500
+Apple 8000
