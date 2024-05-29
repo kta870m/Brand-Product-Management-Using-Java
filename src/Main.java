@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.*;
 import Entity.*;
 import Global.Validation;
+import Repository.BrandProduct;
 import Repository.BrandService;
 import Repository.ProductService;
 
@@ -20,13 +21,21 @@ public class Main {
 
         //List Array for Product
         List<Product> products = new ArrayList<Product>();
+        products.add(new Product("PR01","Samsung Galaxy Note 7","SS01",100,2000,1000,Status.A));
+        products.add(new Product("PR02","MacBook Pro 13","SS02",1000,5000,3000,Status.A));
+        products.add(new Product("PR03","LV x Supreme Red Hoodie","LV01",1000,5000,3000,Status.I));
 
 
         //Repository
         BrandService bs = new BrandService();
         ProductService ps = new ProductService();
+        BrandProduct bp = new BrandProduct();
+
         bs.brands = brands;
         ps.pr = products;
+
+        bp.br = brands;
+        bp.pr = products;
 
         //Brand Management
         String keyword;
@@ -94,7 +103,6 @@ public class Main {
                                         brandName = (new BufferedReader(new InputStreamReader(System.in))).readLine();
                                         newBrand = new Brand(brandId, brandName);
                                         bs.addNew(newBrand);
-                                        flag = true;
                                     }
                                 }while (!flag);
                                 break;
@@ -113,7 +121,6 @@ public class Main {
                                         updateName = (new BufferedReader(new InputStreamReader(System.in))).readLine();
                                         updatedBrand = new Brand(updateBrandId, updateName);
                                         bs.update(updatedBrand);
-                                        flag = true;
                                     }
                                 }while (!flag);
                                 break;
@@ -126,7 +133,6 @@ public class Main {
                                     flag = false;
                                 }else{
                                     bs.Delete(deleteId);
-                                    flag = true;
                                 }
                                 break;
 
@@ -144,19 +150,20 @@ public class Main {
                     case 2:
                         do{
                             System.out.println("====  Product Service ====");
-                            System.out.println("1 - Search Product");
+                            System.out.println("1 - Search Product By Brand Name");
                             System.out.println("2 - Add Product");
                             System.out.println("3 - Update Product");
                             System.out.println("4 - Delete Product");
                             System.out.println("5 - Show Product");
-                            System.out.println("6 - Exit");
+                            System.out.println("6 - Show Product Quantity Satistics By Brand");
+                            System.out.println("7 - Exit");
                             System.out.print("Enter your choice: ");
                             int productChoice = Integer.parseInt(br.readLine());
                             switch (productChoice) {
                                 case 1: //Search Product
-                                    System.out.print("Enter Product Name: ");
+                                    System.out.print("Enter Brand Name: ");
                                     String productName = (new BufferedReader(new InputStreamReader(System.in))).readLine();
-                                    ps.findByName(productName).forEach(System.out::println);
+                                    bp.findProductByBrandName(productName).forEach(System.out::println);
                                     flag = false;
                                     break;
 
@@ -367,6 +374,10 @@ public class Main {
                                     flag = false;
                                     break;
                                 case 6:
+                                    bp.getProductQuantityStatistic().forEach(System.out::println);
+                                    flag = false;
+                                    break;
+                                case 7:
                                     flag = true;
                                     break;
                             }

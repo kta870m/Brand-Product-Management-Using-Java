@@ -46,7 +46,6 @@ public class BrandService implements IGeneric<Brand>{
     }
 
 
-
     @Override
     public List<Brand> findByName(String keyword) {
         String[] kw = keyword.split(" ");
